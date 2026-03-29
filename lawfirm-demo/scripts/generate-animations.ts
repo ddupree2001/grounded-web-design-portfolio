@@ -35,7 +35,7 @@ const ANIMATIONS = [
       "A grand law library with floor-to-ceiling dark wood bookshelves filled with leather-bound legal volumes. Warm desk lamps glowing. Camera slowly pans across the room. Scholars visible in background. Prestigious, traditional, intellectual atmosphere.",
     aspect_ratio: "16:9" as const,
     duration: 5 as const,
-    mode: "std" as const,
+    mode: "pro" as const,
   },
 ];
 
@@ -52,7 +52,7 @@ async function main() {
         aspect_ratio: anim.aspect_ratio,
         duration: anim.duration,
         mode: anim.mode,
-        model_name: "kling-v2",
+        model_name: "kling-v1-5",
       });
 
       console.log(`  Task ID: ${task.task_id} — polling...`);

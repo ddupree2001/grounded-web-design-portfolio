@@ -38,7 +38,7 @@ const ANIMATIONS = [
       "Elegant dark red wine being poured into a crystal wine glass. Candlelight catches the liquid. Slow motion macro. Black marble surface. Sophisticated and luxurious atmosphere.",
     aspect_ratio: "9:16" as const,
     duration: 5 as const,
-    mode: "std" as const,
+    mode: "pro" as const,
   },
 ];
 
@@ -57,7 +57,7 @@ async function main() {
         aspect_ratio: anim.aspect_ratio,
         duration: anim.duration,
         mode: anim.mode,
-        model_name: "kling-v2",
+        model_name: "kling-v1-5",
       });
 
       console.log(`  Task ID: ${task.task_id} — polling...`);

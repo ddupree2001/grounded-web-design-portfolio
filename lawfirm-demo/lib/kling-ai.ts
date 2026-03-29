@@ -2,19 +2,42 @@
  * Kling AI API client
  * Docs: https://kling.ai/document-api/quickStart/productIntroduction/overview
  *
- * Set KLING_AI_API_KEY in your environment variables before use.
+ * Set KLING_ACCESS_KEY and KLING_SECRET_KEY in your environment variables.
+ * A fresh JWT is generated per request using HS256.
  */
+
+import { createHmac } from "crypto";
 
 const KLING_API_BASE = "https://api.klingai.com/v1";
 
-function getApiKey(): string {
-  const key = process.env.KLING_AI_API_KEY;
-  if (!key) {
+function base64url(input: string): string {
+  return Buffer.from(input)
+    .toString("base64")
+    .replace(/=/g, "")
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_");
+}
+
+function generateJwt(): string {
+  const accessKey = process.env.KLING_ACCESS_KEY;
+  const secretKey = process.env.KLING_SECRET_KEY;
+  if (!accessKey || !secretKey) {
     throw new Error(
-      "KLING_AI_API_KEY is not set. Add it to your .env.local file."
+      "KLING_ACCESS_KEY and KLING_SECRET_KEY must be set in .env.local"
     );
   }
-  return key;
+  const now = Math.floor(Date.now() / 1000);
+  const header = base64url(JSON.stringify({ alg: "HS256", typ: "JWT" }));
+  const payload = base64url(
+    JSON.stringify({ iss: accessKey, exp: now + 1800, nbf: now - 5 })
+  );
+  const signature = createHmac("sha256", secretKey)
+    .update(`${header}.${payload}`)
+    .digest("base64")
+    .replace(/=/g, "")
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_");
+  return `${header}.${payload}.${signature}`;
 }
 
 export interface KlingTextToVideoParams {
@@ -81,7 +104,7 @@ export async function generateTextToVideo(
   const response = await fetch(`${KLING_API_BASE}/videos/text2video`, {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${getApiKey()}`,
+      Authorization: `Bearer ${generateJwt()}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -116,7 +139,7 @@ export async function generateImageToVideo(
   const response = await fetch(`${KLING_API_BASE}/videos/image2video`, {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${getApiKey()}`,
+      Authorization: `Bearer ${generateJwt()}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -149,7 +172,7 @@ export async function getTaskStatus(taskId: string): Promise<KlingVideoTask> {
     `${KLING_API_BASE}/videos/text2video/${taskId}`,
     {
       headers: {
-        Authorization: `Bearer ${getApiKey()}`,
+        Authorization: `Bearer ${generateJwt()}`,
       },
     }
   );

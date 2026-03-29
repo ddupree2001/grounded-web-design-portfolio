@@ -26,7 +26,7 @@ const ANIMATIONS = [
       "A modern SaaS analytics dashboard coming to life. Charts animating in, real-time metrics updating, smooth transitions. Dark theme UI. Purple and indigo color scheme. Clean, minimal design. Professional software demo style.",
     aspect_ratio: "16:9" as const,
     duration: 5 as const,
-    mode: "std" as const,
+    mode: "pro" as const,
   },
   {
     id: "ai_brain",
@@ -52,7 +52,7 @@ async function main() {
         aspect_ratio: anim.aspect_ratio,
         duration: anim.duration,
         mode: anim.mode,
-        model_name: "kling-v2",
+        model_name: "kling-v1-5",
       });
 
       console.log(`  Task ID: ${task.task_id} — polling...`);
