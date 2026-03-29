@@ -2,6 +2,7 @@ import KlingVideo from "@/components/KlingVideo";
 import AIImage from "@/components/AIImage";
 import { getAnimationUrls } from "@/lib/animations";
 import { getImageUrls } from "@/lib/images";
+import ScrollReveal from "./ScrollReveal";
 
 const practiceAreas = [
   {
@@ -214,7 +215,7 @@ export default function Home() {
       {/* Practice Areas */}
       <section id="practice-areas" className="py-24 px-6 md:px-16 max-w-7xl mx-auto">
         <div className="grid md:grid-cols-5 gap-12 items-start">
-          <div className="md:col-span-2">
+          <ScrollReveal className="md:col-span-2" direction="left">
             <p
               className="text-[#b8973a] tracking-[0.3em] uppercase text-xs mb-4"
               style={{ fontFamily: "Helvetica Neue, sans-serif" }}
@@ -237,11 +238,11 @@ export default function Home() {
               engagement. We don&apos;t just provide legal advice — we provide
               strategic counsel that drives results.
             </p>
-          </div>
+          </ScrollReveal>
           <div className="md:col-span-3 grid sm:grid-cols-2 gap-4">
-            {practiceAreas.map((area) => (
+            {practiceAreas.map((area, i) => (
+              <ScrollReveal key={area.title} delay={i * 80}>
               <div
-                key={area.title}
                 className="p-6 border border-[#0f1f3d]/10 hover:border-[#b8973a] hover:bg-[#0f1f3d]/[0.02] transition-all duration-300 group cursor-pointer"
               >
                 <div className="text-2xl mb-3">{area.icon}</div>
@@ -258,6 +259,7 @@ export default function Home() {
                   {area.desc}
                 </p>
               </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -268,7 +270,7 @@ export default function Home() {
 
       {/* Our Team */}
       <section id="our-team" className="py-24 px-6 md:px-16 max-w-7xl mx-auto">
-        <div className="text-center mb-16">
+        <ScrollReveal className="text-center mb-16">
           <p
             className="text-[#b8973a] tracking-[0.3em] uppercase text-xs mb-4"
             style={{ fontFamily: "Helvetica Neue, sans-serif" }}
@@ -281,11 +283,11 @@ export default function Home() {
           >
             Our Attorneys
           </h2>
-        </div>
+        </ScrollReveal>
         <div className="grid md:grid-cols-3 gap-8">
-          {attorneys.map((attorney) => (
+          {attorneys.map((attorney, i) => (
+            <ScrollReveal key={attorney.name} delay={i * 120}>
             <div
-              key={attorney.name}
               className="group cursor-pointer"
             >
               <div className="aspect-[4/5] bg-[#0f1f3d]/5 mb-6 flex items-center justify-center relative overflow-hidden hover:bg-[#0f1f3d]/10 transition-all">
@@ -331,6 +333,7 @@ export default function Home() {
                 {attorney.bio}
               </p>
             </div>
+            </ScrollReveal>
           ))}
         </div>
       </section>
@@ -344,7 +347,7 @@ export default function Home() {
         className="py-24 px-6 md:px-16 bg-[#0f1f3d] text-white"
       >
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-          <div>
+          <ScrollReveal direction="left">
             <p
               className="text-[#b8973a] tracking-[0.3em] uppercase text-xs mb-4"
               style={{ fontFamily: "Helvetica Neue, sans-serif" }}
@@ -399,7 +402,8 @@ export default function Home() {
                 </div>
               ))}
             </div>
-          </div>
+          </ScrollReveal>
+          <ScrollReveal direction="right">
           <div className="relative">
             <div className="p-10 border border-[#b8973a]/20 bg-white/5">
               <p
@@ -425,13 +429,14 @@ export default function Home() {
             </div>
             <div className="absolute -bottom-4 -left-4 w-full h-full border border-[#b8973a]/10 pointer-events-none" />
           </div>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* Contact */}
       <section id="contact" className="py-24 px-6 md:px-16 max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-16">
-          <div>
+          <ScrollReveal direction="left">
             <p
               className="text-[#b8973a] tracking-[0.3em] uppercase text-xs mb-4"
               style={{ fontFamily: "Helvetica Neue, sans-serif" }}
@@ -477,7 +482,8 @@ export default function Home() {
                 </div>
               ))}
             </div>
-          </div>
+          </ScrollReveal>
+          <ScrollReveal direction="right">
           <form className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
@@ -588,6 +594,7 @@ export default function Home() {
               All communications are protected by attorney-client privilege
             </p>
           </form>
+          </ScrollReveal>
         </div>
       </section>
 

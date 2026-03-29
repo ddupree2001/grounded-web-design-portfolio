@@ -2,6 +2,7 @@ import KlingVideo from "@/components/KlingVideo";
 import AIImage from "@/components/AIImage";
 import { getAnimationUrls } from "@/lib/animations";
 import { getImageUrls } from "@/lib/images";
+import ScrollReveal from "./ScrollReveal";
 
 const features = [
   {
@@ -256,13 +257,15 @@ export default function Home() {
       {/* Metrics */}
       <section className="py-16 border-y border-white/5 bg-white/[0.02]">
         <div className="max-w-5xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
-          {metrics.map((m) => (
-            <div key={m.value} className="text-center">
+          {metrics.map((m, i) => (
+            <ScrollReveal key={m.value} delay={i * 80}>
+            <div className="text-center">
               <p className="text-3xl md:text-4xl font-bold gradient-text mb-2">
                 {m.value}
               </p>
               <p className="text-[#f0f0ff]/50 text-sm">{m.label}</p>
             </div>
+            </ScrollReveal>
           ))}
         </div>
       </section>
@@ -291,7 +294,7 @@ export default function Home() {
 
       {/* Features */}
       <section id="features" className="py-24 px-6 max-w-6xl mx-auto">
-        <div className="text-center mb-16">
+        <ScrollReveal className="text-center mb-16">
           <p className="text-indigo-400 text-sm font-medium tracking-widest uppercase mb-4">
             Platform
           </p>
@@ -303,12 +306,12 @@ export default function Home() {
           <p className="text-[#f0f0ff]/50 text-xl max-w-xl mx-auto">
             One platform. Every insight. Infinite possibilities.
           </p>
-        </div>
+        </ScrollReveal>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {features.map((f) => (
+          {features.map((f, i) => (
+            <ScrollReveal key={f.title} delay={i * 70}>
             <div
-              key={f.title}
               className="p-6 rounded-2xl border border-white/[0.06] bg-white/[0.02] hover:border-indigo-500/30 hover:bg-indigo-500/[0.04] transition-all duration-300 group"
             >
               <div className="text-3xl mb-4">{f.icon}</div>
@@ -319,6 +322,7 @@ export default function Home() {
                 {f.desc}
               </p>
             </div>
+            </ScrollReveal>
           ))}
         </div>
       </section>
@@ -335,9 +339,9 @@ export default function Home() {
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
-            {testimonials.map((t) => (
+            {testimonials.map((t, i) => (
+              <ScrollReveal key={t.author} delay={i * 100}>
               <div
-                key={t.author}
                 className="p-6 rounded-2xl border border-white/[0.06] bg-white/[0.02]"
               >
                 <p className="text-[#f0f0ff]/80 leading-relaxed mb-6">
@@ -355,6 +359,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -375,9 +380,9 @@ export default function Home() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
-          {plans.map((plan) => (
+          {plans.map((plan, i) => (
+            <ScrollReveal key={plan.name} delay={i * 100}>
             <div
-              key={plan.name}
               className={`p-8 rounded-2xl border transition-all duration-300 relative ${
                 plan.highlighted
                   ? "border-indigo-500 bg-indigo-500/[0.08] glow-border"
@@ -420,12 +425,14 @@ export default function Home() {
                 {plan.cta}
               </a>
             </div>
+            </ScrollReveal>
           ))}
         </div>
       </section>
 
       {/* CTA */}
       <section className="py-24 px-6">
+        <ScrollReveal>
         <div className="max-w-3xl mx-auto text-center rounded-2xl border border-indigo-500/20 bg-indigo-500/[0.05] p-12">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Ready to get started?
@@ -448,6 +455,7 @@ export default function Home() {
             </a>
           </div>
         </div>
+        </ScrollReveal>
       </section>
 
       {/* Footer */}

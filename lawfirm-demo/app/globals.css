@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+/* Scroll reveal animations */
+.sr-base { transition: opacity 0.7s ease, transform 0.7s ease; }
+.sr-up { opacity: 0; transform: translateY(28px); }
+.sr-left { opacity: 0; transform: translateX(-28px); }
+.sr-right { opacity: 0; transform: translateX(28px); }
+.sr-visible { opacity: 1 !important; transform: none !important; }
+
 html {
   scroll-behavior: smooth;
 }

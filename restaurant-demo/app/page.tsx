@@ -3,6 +3,7 @@ import KlingVideo from "@/components/KlingVideo";
 import AIImage from "@/components/AIImage";
 import { getAnimationUrls } from "@/lib/animations";
 import { getImageUrls } from "@/lib/images";
+import ScrollReveal from "./ScrollReveal";
 
 const navLinks = ["Menu", "About", "Reservations", "Contact"];
 
@@ -199,7 +200,7 @@ export default function Home() {
       {/* About */}
       <section id="about" className="py-28 px-6 md:px-16 max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-16 items-center">
-          <div>
+          <ScrollReveal direction="left">
             <p className="text-[#c9a84c] tracking-[0.3em] uppercase text-xs mb-4">
               Our Story
             </p>
@@ -234,7 +235,8 @@ export default function Home() {
                 </div>
               ))}
             </div>
-          </div>
+          </ScrollReveal>
+          <ScrollReveal direction="right">
           <div className="relative">
             <div
               className="aspect-[3/4] rounded-sm overflow-hidden flex items-center justify-center"
@@ -267,6 +269,7 @@ export default function Home() {
             </div>
             <div className="absolute -top-4 -right-4 w-full h-full border border-[#c9a84c]/20 rounded-sm pointer-events-none" />
           </div>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -274,17 +277,18 @@ export default function Home() {
 
       {/* Menu */}
       <section id="menu" className="py-28 px-6 md:px-16 max-w-7xl mx-auto">
-        <div className="text-center mb-16">
+        <ScrollReveal className="text-center mb-16">
           <p className="text-[#c9a84c] tracking-[0.3em] uppercase text-xs mb-4">
             Seasonal Selection
           </p>
           <h2 className="font-serif-display text-4xl md:text-5xl">
             Our Menu
           </h2>
-        </div>
+        </ScrollReveal>
         <div className="grid md:grid-cols-3 gap-12">
-          {menuHighlights.map((section) => (
-            <div key={section.category}>
+          {menuHighlights.map((section, i) => (
+            <ScrollReveal key={section.category} delay={i * 100}>
+            <div>
               <h3 className="font-serif-display text-2xl italic text-[#c9a84c] mb-8 pb-4 border-b border-[#c9a84c]/20">
                 {section.category}
               </h3>
@@ -306,6 +310,7 @@ export default function Home() {
                 ))}
               </div>
             </div>
+            </ScrollReveal>
           ))}
         </div>
         <div className="text-center mt-16">
@@ -322,18 +327,18 @@ export default function Home() {
 
       {/* Testimonials */}
       <section className="py-28 px-6 md:px-16 bg-[#2a1e0a]/30">
-        <div className="text-center mb-16">
+        <ScrollReveal className="text-center mb-16">
           <p className="text-[#c9a84c] tracking-[0.3em] uppercase text-xs mb-4">
             Guest Experiences
           </p>
           <h2 className="font-serif-display text-4xl md:text-5xl">
             What Our Guests Say
           </h2>
-        </div>
+        </ScrollReveal>
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {testimonials.map((t, i) => (
+            <ScrollReveal key={i} delay={i * 100}>
             <div
-              key={i}
               className="p-8 border border-[#c9a84c]/20 hover:border-[#c9a84c]/50 transition-all duration-300"
             >
               <p className="font-serif-display text-4xl text-[#c9a84c] mb-4 leading-none">
@@ -349,6 +354,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
+            </ScrollReveal>
           ))}
         </div>
       </section>
@@ -362,7 +368,7 @@ export default function Home() {
             "linear-gradient(to bottom, #1a1209 0%, #2a1e0a 50%, #1a1209 100%)",
         }}
       >
-        <div className="max-w-2xl mx-auto text-center">
+        <ScrollReveal className="max-w-2xl mx-auto text-center">
           <p className="text-[#c9a84c] tracking-[0.3em] uppercase text-xs mb-4">
             Join Us
           </p>
@@ -417,7 +423,7 @@ export default function Home() {
               Confirm Reservation
             </button>
           </form>
-        </div>
+        </ScrollReveal>
       </section>
 
       {/* Footer */}
