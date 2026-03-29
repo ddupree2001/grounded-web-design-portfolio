@@ -57,7 +57,7 @@ const services = [
     features: [
       "Up to 12 pages",
       "Custom UI / brand design system",
-      "AI-generated photography (Imagen 4)",
+      "AI-generated imagery (Imagen 4)",
       "Advanced SEO + performance tuning",
       "Booking / inquiry flow",
       "CMS integration (Sanity or Contentful)",
@@ -80,7 +80,7 @@ const services = [
       "E-commerce or booking engine",
       "Analytics dashboard",
       "Ongoing retainer available",
-      "Dedicated CTO support",
+      "Direct access to our CTO for technical architecture decisions",
     ],
     cta: "Let's Talk",
     highlighted: false,
@@ -124,7 +124,7 @@ const stats = [
 const faqs = [
   {
     q: "Do I need to provide my own content?",
-    a: "We generate professional AI photography for every project. You provide the copy (or we can help structure it). No stock photos, no lorem ipsum.",
+    a: "We handle all AI-generated imagery. You provide the copy; we organize and format it for the web. No stock photos, no lorem ipsum.",
   },
   {
     q: "What technology do you use?",
@@ -136,7 +136,7 @@ const faqs = [
   },
   {
     q: "What if I need changes after launch?",
-    a: "Every project includes a warranty period. After that, we offer maintenance packages or hourly support.",
+    a: "Every project includes a 30-day warranty period for bug fixes after launch. After that, we offer maintenance packages or hourly support.",
   },
 ];
 
@@ -263,7 +263,7 @@ export default function Home() {
                 boxShadow: "0 0 40px rgba(99,102,241,0.3)",
               }}
             >
-              Book a free walkthrough →
+              Book a Free Walkthrough →
             </a>
             <a
               href="#portfolio"
@@ -615,7 +615,7 @@ export default function Home() {
                 boxShadow: "0 0 30px rgba(99,102,241,0.3)",
               }}
             >
-              Book Free Walkthrough
+              Book a Free Walkthrough →
             </button>
           </form>
           <p className="text-xs" style={{ color: "var(--muted)" }}>
