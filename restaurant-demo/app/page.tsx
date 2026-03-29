@@ -1,6 +1,8 @@
 import Link from "next/link";
 import KlingVideo from "@/components/KlingVideo";
+import AIImage from "@/components/AIImage";
 import { getAnimationUrls } from "@/lib/animations";
+import { getImageUrls } from "@/lib/images";
 
 const navLinks = ["Menu", "About", "Reservations", "Contact"];
 
@@ -93,6 +95,7 @@ const stats = [
 
 export default function Home() {
   const animations = getAnimationUrls();
+  const images = getImageUrls();
   return (
     <div className="min-h-screen">
       {/* Navigation */}
@@ -132,6 +135,17 @@ export default function Home() {
           <KlingVideo
             videoUrl={animations.hero}
             className="absolute inset-0 w-full h-full"
+          />
+        )}
+        {/* AI hero image (shown when video not available) */}
+        {!animations.hero && images.hero && (
+          <AIImage
+            src={images.hero}
+            alt="Bella Vista restaurant ambiance"
+            fill
+            objectFit="cover"
+            priority
+            className="absolute inset-0"
           />
         )}
         {/* Overlay for text readability */}
@@ -223,23 +237,33 @@ export default function Home() {
           </div>
           <div className="relative">
             <div
-              className="aspect-[3/4] rounded-sm flex items-center justify-center"
+              className="aspect-[3/4] rounded-sm overflow-hidden flex items-center justify-center"
               style={{
                 background:
                   "linear-gradient(145deg, #2a1e0a 0%, #3d2d12 50%, #2a1e0a 100%)",
               }}
             >
-              <div className="text-center p-12">
-                <p className="font-serif-display text-6xl text-[#c9a84c] italic mb-4 leading-none">
-                  &ldquo;
-                </p>
-                <p className="font-serif-display text-2xl italic text-[#f5f0e8]/90 leading-relaxed">
-                  Food is not just eating energy. It&apos;s an experience.
-                </p>
-                <p className="text-[#c9a84c] mt-6 text-sm tracking-widest uppercase">
-                  — Chef Marco Ricci
-                </p>
-              </div>
+              {images.about ? (
+                <AIImage
+                  src={images.about}
+                  alt="Bella Vista restaurant interior"
+                  fill
+                  objectFit="cover"
+                  className="rounded-sm"
+                />
+              ) : (
+                <div className="text-center p-12">
+                  <p className="font-serif-display text-6xl text-[#c9a84c] italic mb-4 leading-none">
+                    &ldquo;
+                  </p>
+                  <p className="font-serif-display text-2xl italic text-[#f5f0e8]/90 leading-relaxed">
+                    Food is not just eating energy. It&apos;s an experience.
+                  </p>
+                  <p className="text-[#c9a84c] mt-6 text-sm tracking-widest uppercase">
+                    — Chef Marco Ricci
+                  </p>
+                </div>
+              )}
             </div>
             <div className="absolute -top-4 -right-4 w-full h-full border border-[#c9a84c]/20 rounded-sm pointer-events-none" />
           </div>

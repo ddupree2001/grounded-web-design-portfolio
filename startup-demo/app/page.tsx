@@ -1,5 +1,7 @@
 import KlingVideo from "@/components/KlingVideo";
+import AIImage from "@/components/AIImage";
 import { getAnimationUrls } from "@/lib/animations";
+import { getImageUrls } from "@/lib/images";
 
 const features = [
   {
@@ -119,6 +121,7 @@ const plans = [
 
 export default function Home() {
   const animations = getAnimationUrls();
+  const images = getImageUrls();
   return (
     <div className="min-h-screen">
       {/* Navigation */}
@@ -165,11 +168,22 @@ export default function Home() {
             className="absolute inset-0 w-full h-full"
           />
         )}
+        {/* AI hero image (shown when video not available) */}
+        {!animations.hero && images.hero && (
+          <AIImage
+            src={images.hero}
+            alt="Nexus AI data visualization"
+            fill
+            objectFit="cover"
+            priority
+            className="absolute inset-0"
+          />
+        )}
         {/* Background effects / overlay */}
         <div
           className="absolute inset-0"
           style={{
-            background: animations.hero
+            background: animations.hero || images.hero
               ? "rgba(6,6,15,0.65)"
               : "radial-gradient(ellipse 80% 60% at 50% -10%, rgba(99,102,241,0.15) 0%, transparent 60%)",
           }}
@@ -252,6 +266,28 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      {/* Product screenshot (shown when AI image is available) */}
+      {images.dashboard && (
+        <section className="py-16 px-6 max-w-5xl mx-auto">
+          <div className="text-center mb-8">
+            <p className="text-indigo-400 text-sm font-medium tracking-widest uppercase mb-2">
+              Product
+            </p>
+            <h2 className="text-3xl font-bold">See it in action</h2>
+          </div>
+          <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-indigo-500/10">
+            <AIImage
+              src={images.dashboard}
+              alt="Nexus AI analytics dashboard"
+              width={1200}
+              height={675}
+              className="w-full h-auto"
+              priority={false}
+            />
+          </div>
+        </section>
+      )}
 
       {/* Features */}
       <section id="features" className="py-24 px-6 max-w-6xl mx-auto">

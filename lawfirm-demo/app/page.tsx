@@ -1,5 +1,7 @@
 import KlingVideo from "@/components/KlingVideo";
+import AIImage from "@/components/AIImage";
 import { getAnimationUrls } from "@/lib/animations";
+import { getImageUrls } from "@/lib/images";
 
 const practiceAreas = [
   {
@@ -70,6 +72,14 @@ const accolades = [
 
 export default function Home() {
   const animations = getAnimationUrls();
+  const images = getImageUrls();
+
+  const attorneyImages: Record<string, string | undefined> = {
+    "Eleanor Whitmore": images.attorney_eleanor,
+    "James Thornton": images.attorney_james,
+    "Sophia Kaur": images.attorney_sophia,
+  };
+
   return (
     <div className="min-h-screen">
       {/* Navigation */}
@@ -118,8 +128,19 @@ export default function Home() {
             className="absolute inset-0 w-full h-full"
           />
         )}
+        {/* AI hero image (shown when video not available) */}
+        {!animations.hero && images.hero && (
+          <AIImage
+            src={images.hero}
+            alt="Courthouse exterior"
+            fill
+            objectFit="cover"
+            priority
+            className="absolute inset-0"
+          />
+        )}
         {/* Overlay for text readability */}
-        {animations.hero && <div className="absolute inset-0 bg-[#0f1f3d]/70" />}
+        {(animations.hero || images.hero) && <div className="absolute inset-0 bg-[#0f1f3d]/70" />}
         {/* Decorative vertical line */}
         <div className="absolute left-16 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[#b8973a]/30 to-transparent hidden md:block" />
 
@@ -268,12 +289,21 @@ export default function Home() {
               className="group cursor-pointer"
             >
               <div className="aspect-[4/5] bg-[#0f1f3d]/5 mb-6 flex items-center justify-center relative overflow-hidden hover:bg-[#0f1f3d]/10 transition-all">
-                <span
-                  className="text-6xl font-light text-[#b8973a]/40"
-                  style={{ fontFamily: "Georgia, serif" }}
-                >
-                  {attorney.initials}
-                </span>
+                {attorneyImages[attorney.name] ? (
+                  <AIImage
+                    src={attorneyImages[attorney.name]}
+                    alt={`${attorney.name}, ${attorney.title}`}
+                    fill
+                    objectFit="cover"
+                  />
+                ) : (
+                  <span
+                    className="text-6xl font-light text-[#b8973a]/40"
+                    style={{ fontFamily: "Georgia, serif" }}
+                  >
+                    {attorney.initials}
+                  </span>
+                )}
                 <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#b8973a] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
               </div>
               <p
